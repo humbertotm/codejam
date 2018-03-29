@@ -1,1 +1,1 @@
-This are the solutions in Ruby for the codejam exercises.
+These are the solutions in Ruby for the codejam exercises.

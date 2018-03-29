@@ -2,7 +2,7 @@
 
 # This shall be taken as input from the command line
 # The array will have to be built
-$pancakes_on_diners_dish = [3, 6, 9]
+$pancakes_on_diners_dish = [3, 6, 9, 500, 500]
 $minutes = 0
 
 def eat_pancakes()

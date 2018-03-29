@@ -1,5 +1,11 @@
 # Create a class that will process the input depending on the
 
+File.open("./inputs/A-large-practice.in", "r") do |f|
+  f.each_line do |line|
+
+  end
+end
+
 # Global vars and inputs
 # These shall be populated by the input
 $s_max = 5

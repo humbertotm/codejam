@@ -1,17 +1,14 @@
-# We shall place the recursive solution to the problem
-# right here
-
-$pancakes_on_diners_dish = [3, 6, 9, 500, 500]
+$pancakes_on_diners_dish = [3, 6, 9, 1000]
 $accumulated_special_minutes = 0
 $minutes_spent_eating = 0
 
-# $current_max_value = $pancakes_on_diners_dish.max
-
 $current_iteration_time_to_finish = $pancakes_on_diners_dish.max
 
-print "Inital array: #{$pancakes_on_diners_dish}/n Time to finish: #{$current_iteration_time_to_finish}\n"
+print "Inital array: #{$pancakes_on_diners_dish}\n
+Time to finish: #{$current_iteration_time_to_finish}\n"
 
 def eat_pancakes()
+  # Decrease pancake on every plate by one
   $pancakes_on_diners_dish.each_with_index do |element, index|
     $pancakes_on_diners_dish[index] = element - 1
   end
@@ -23,10 +20,11 @@ def eat_pancakes()
     element > 0
   end
 
-  print "Cakes: #{$pancakes_on_diners_dish} Minutes spent eating: #{$minutes_spent_eating}\n"
+  print "Cakes: #{$pancakes_on_diners_dish}\n
+  Minutes spent eating so far: #{$minutes_spent_eating}\n"
 end
 
-def construct_new_array()
+def mutate_pancakes_array()
   print "Dividing max value in #{$pancakes_on_diners_dish}\n"
 
   max_value = $pancakes_on_diners_dish.max
@@ -63,19 +61,12 @@ def find_minimum_time_to_finish(pancakes_on_dishes)
 
   max_value = pancakes_on_dishes.max
 
-  if max_value % 2 != 0 && max_value > 4
-    eat_pancakes()
-    return find_minimum_time_to_finish($pancakes_on_diners_dish)
-    # return
-  end
-
-  if max_value % 2 != 0 && max_value < 4
+  if max_value % 2 != 0
     eat_pancakes()
     return find_minimum_time_to_finish($pancakes_on_diners_dish)
   end
 
   if max_value % 2 == 0
-    # new_max_value = max_value / 2 | next highest value in arr
     new_max = new_max_value(max_value)
     # number of times maxValue is repeated
     n = pancakes_on_dishes.count(max_value)
@@ -83,23 +74,19 @@ def find_minimum_time_to_finish(pancakes_on_dishes)
 
     print "current it time: #{$current_iteration_time_to_finish} vs #{resulting_time_if_divided}\n"
 
-    # problem here
     if resulting_time_if_divided < $current_iteration_time_to_finish
-      # While max value del array sea igual al max max value
-      # anterior, cosntruct new array
-      construct_new_array()
+      mutate_pancakes_array()
       while $pancakes_on_diners_dish.max == max_value
-        construct_new_array()
+        mutate_pancakes_array()
       end
 
       $current_iteration_time_to_finish = resulting_time_if_divided
       $accumulated_special_minutes = $accumulated_special_minutes + n
-      # construct_new_array()
+
       print "Going for another iteration with #{$pancakes_on_diners_dish}\n"
+
       return find_minimum_time_to_finish($pancakes_on_diners_dish)
     else
-      #total_time = $accumulated_special_minutes + $minutes_spent_eating + max_value
-      #print "Time: #{total_time}\n"
       eat_pancakes()
       return find_minimum_time_to_finish($pancakes_on_diners_dish)
     end
